@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.flutter-plugins
+.packages
+.pub/
+build/
+node_modules/
+.env
