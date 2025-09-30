@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="MoodMapper MVP Architecture" id="moodmapper-arch">
+    <mxGraphModel dx="1620" dy="1024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="mobileApp" value="Consumer Mobile App (Flutter)" style="shape=mxgraph.azure.mobile;fillColor=#007FFF;gradientColor=none;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="apim" value="Azure API Management" style="shape=mxgraph.azure.api_management;fillColor=#007FFF;gradientColor=none;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="funcIngest" value="mm-func-mood-ingest" style="shape=mxgraph.azure.functions;fillColor=#007FFF;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="120" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="funcRecs" value="mm-func-recommendations-dal" style="shape=mxgraph.azure.functions;fillColor=#007FFF;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="320" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="cosmos" value="Azure Cosmos DB" style="shape=mxgraph.azure.cosmosdb;fillColor=#007FFF;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="220" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="servicebus" value="Azure Service Bus" style="shape=mxgraph.azure.service_bus;fillColor=#007FFF;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="120" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="storage" value="Azure Blob Storage" style="shape=mxgraph.azure.storage;fillColor=#007FFF;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="320" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="openai" value="OpenAI API" style="shape=mxgraph.general.cloud;fillColor=#FFCC00;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="120" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="livekit" value="LiveKit (RTC)" style="shape=mxgraph.general.cloud;fillColor=#FF9999;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="220" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="aks" value="AKS (future)" style="shape=mxgraph.azure.kubernetes_service;fillColor=#cccccc;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="320" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="mobileApp" target="apim">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="apim" target="funcIngest">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="apim" target="funcRecs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="funcIngest" target="cosmos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="funcRecs" target="cosmos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="funcIngest" target="servicebus">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge7" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="funcRecs" target="storage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge8" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="funcRecs" target="openai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge9" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="mobileApp" target="livekit">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
