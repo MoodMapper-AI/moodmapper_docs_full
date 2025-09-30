@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MoodMapper Documentation</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 0; display: flex; }
+.sidebar { width: 300px; background: #f4f4f4; padding: 20px; overflow-y: auto; height: 100vh; }
+.content { flex: 1; padding: 2rem; max-width: 900px; }
+h1,h2,h3 { color: #2c3e50; }
+ul { list-style: none; padding-left: 1rem; }
+li { margin: 0.5rem 0; }
+a { text-decoration: none; color: #3498db; }
+a:hover { text-decoration: underline; }
+.checklist li::before { content: "✅ "; color: green; }
+input[type="text"] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
+.search-result { margin-bottom: 0.5rem; }
+.collapsible { cursor: pointer; user-select: none; }
+.nested { display: none; margin-left: 1rem; }
+.active { display: block; }
+.active-page { font-weight: bold; color: #e74c3c; }
+.toc-link { font-size: 0.9rem; margin-left: 1rem; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Docs Navigation</h2>
+  <ul id="sidebar-links">
+
+  </ul>
+</div>
+
+<div class="content">
+  <h1>MoodMapper Documentation</h1>
+
+  <div class="section">
+    <h2>Search Docs</h2>
+    <input type="text" id="searchBox" placeholder="Type to search..." oninput="searchDocs()">
+    <div id="searchResults"></div>
+  </div>
+
+  <div class="section">
+    <h2>App Overview</h2>
+    <p>MoodMapper is a next-generation mood tracking and recommendation application. It captures user mood inputs, analyzes patterns, and delivers personalized insights, scripture references, and playlist recommendations via AI-driven microservices.</p>
+  </div>
+
+  <div class="section">
+    <h2>App Features</h2>
+    <ul>
+      <li>Mood Input & Analysis</li>
+      <li>Personalized Recommendations (Music, Scriptures, AI Insights)</li>
+      <li>Microservices Architecture with Azure Functions</li>
+      <li>API Layer Management via Azure API Management</li>
+      <li>Dynamic Documentation Deployment via GitHub Pages</li>
+      <li>Scalable and Extensible MVP</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>MVP Delivery Checklist</h2>
+    <ul class="checklist">
+      <li>Consumer Mobile App MVP</li>
+      <li>Mood Ingest Microservice (mm-func-mood-ingest)</li>
+      <li>Recommendations Microservice (mm-func-recommendations-dal)</li>
+      <li>Azure CosmosDB Integration</li>
+      <li>API Layer (APIM) for Mobile App Consumption</li>
+      <li>Automated Docs Deployment via GitHub Pages</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// Collapsible sidebar
+document.querySelectorAll(".collapsible").forEach(item => {
+  item.addEventListener("click", function() {
+    this.classList.toggle("active");
+    const nested = this.nextElementSibling;
+    if (nested.style.display === "block") nested.style.display = "none";
+    else nested.style.display = "block";
+  });
+});
+
+// Highlight active page in sidebar
+const currentPage = window.location.pathname.split("/").pop();
+document.querySelectorAll("#sidebar-links a").forEach(a => {
+  if (a.getAttribute("href") === currentPage) a.classList.add("active-page");
+});
+
+// Search functionality
+let docs = [];
+fetch('search_index.json').then(res => res.json()).then(data => { docs = data; });
+function searchDocs() {
+  const query = document.getElementById('searchBox').value.toLowerCase();
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = '';
+  if (!query) return;
+  const results = docs.filter(d => d.title.toLowerCase().includes(query) || d.content.toLowerCase().includes(query));
+  results.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'search-result';
+    div.innerHTML = '<a href="' + r.url + '">' + r.title + '</a>';
+    resultsDiv.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
